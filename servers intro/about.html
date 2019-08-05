@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>UI names</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <style>
+        .icontainer {
+            margin-top: 20px !important;
+        }
+
+        ;
+    </style>
+
+
+    <div class="container">
+        <!-- form where you input country -->
+        <div class="row">
+            <div class="col-sm-6">
+                <form id="form">
+                <select class="custom-select custom-select-sm icontainer" id="country">
+                    <option selected>Choose Country</option>
+                    <option value="korea">Korea</option>
+                    <option value="india">India</option>
+                    <option value="germany">Germany</option>
+                </select>
+
+                <!-- form where you input gender -->
+                <select class="custom-select custom-select-sm icontainer" id="gender">
+                    <option selected>Gender</option>
+                    <option value='male'>Male</option>
+                    <option value="female">Female</option>
+                </select>
+
+                <button class="btn btn-outline-secondary icontainer" type="submit">Submit form</button>
+
+                </form>
+            </div>
+            <!-- form section ends -->
+            <!-- results section begins -->
+            <div class="col-sm-6 icontainer" id="results">
+                <!-- res -->
+            </div>
+            <!-- results section ends -->
+        </div>
+    </div>
+
+    <script>
+        var user = document.getElementById("form").addEventListener('submit', getName);
+
+        function getName(e){
+            e.preventDefault();
+           let region = e.target.country.value; //value selected in form
+           let gender = e.target.gender.value;
+           
+
+            //create the xhr object
+            const xhr = new XMLHttpRequest();
+            let url = `https://uinames.com/api/?gender=${gender}&region=${region}&amount=5`
+
+            //open the connection and make a request
+            xhr.open("GET",url,true);
+
+            //a function which executes when it loads
+            xhr.onload = function(){
+                //console.log(this); this is the request
+                if (this.status == 200){
+                    const data = JSON.parse(this.responseText);
+                    var output = '';
+                    //build the template
+                    for(var i=0;i<5;i++){
+                        //using template literals
+                        output += ` 
+                    <ul>
+                        <li> First Name : ${data[i].name}</li>
+                        <li> Last Name : ${data[i].surname}</li>
+                    </ul>
+                    `
+                    }
+                    // const output = `
+                    // <ul>
+                    //     <li> First Name : ${data.name}</li>
+                    //     <li> Last Name : ${data.surname}</li>
+                    // </ul>
+                    // `
+                    //print in html
+                    document.getElementById("results").innerHTML= output;
+                }
+            }
+
+            //send the request
+            xhr.send();
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
