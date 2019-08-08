@@ -11,6 +11,7 @@ const port = 5000;
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false })); //this to send the data through the form you built
  
+//body-parser extract the entire body portion of an incoming request stream and exposes it on req.body.
 // parse application/json
 app.use(bodyParser.json()); //this gives you the additional option of sending your data as a json object.
 
