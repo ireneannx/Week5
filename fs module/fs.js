@@ -173,7 +173,6 @@ var fs= require("fs");
 
 
 
-//Read a directory
-//Remove a directory
+
 
 
