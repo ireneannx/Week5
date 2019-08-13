@@ -12,4 +12,6 @@ router.get('/customers', customers.findAll)
 //retrieve a particular customer by ID
 router.get('/customers/:id', customers.findOne)
 
+//update a customer
+router.put('/customer/:id',customers.updateOne)
 module.exports = router

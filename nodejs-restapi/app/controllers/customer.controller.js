@@ -46,6 +46,12 @@ exports.create = (req, res)=>{
 }
 
 exports.findOne = (req,res)=>{
-    var customer = customers["customer"+]
+    var customer = customers["customer"+req.params.id];
+    console.log(customer);
+    res.end("found successfully!");
 }
 
+exports.updateOne =(req,res)=>{
+  var old_customer = req.body 
+  customer["customer"+req.params.id] = old_customer;
+}
